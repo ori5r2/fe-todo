@@ -11,6 +11,13 @@ class Start {
       output: process.stdout,
     });
   }
+
+  // 콘솔에서 입력 받는 함수
+  displayMenu() {
+    this.rl.question("명령하세요: ", (input) => {
+      this.handleInput(input.trim());
+    });
+  }
 }
 
 const program = new Start();
