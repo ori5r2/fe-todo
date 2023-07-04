@@ -50,5 +50,7 @@ class Start {
   }
 }
 
-const program = new Start();
-program.displayMenu();
+(function () {
+  const program = new Start();
+  program.displayMenu();
+})();
