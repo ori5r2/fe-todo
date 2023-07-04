@@ -85,19 +85,24 @@ class TodoList {
     console.log(`${name} 1개가 추가됐습니다.(id : ${id})`);
   }
 
-  // TodoList에 존재하는 id값에 해당하는 todo 삭제
   delete(id) {
-    let isDelete = false;
-    this.todo_list = this.todo_list.filter((x) => {
-      if (x.id === id) {
-        isDelete = true;
-        console.log(`${x.name} ${x.status}가 목록에서 삭제됐습니다`);
-      }
-      return x.id !== id;
-    });
+    if (id == "all") {
+      this.todo_list = [];
+    } else {
+      // TodoList에 존재하는 id값에 해당하는 todo 삭제
+      id = Number(id);
+      let isDelete = false;
+      this.todo_list = this.todo_list.filter((x) => {
+        if (x.id === id) {
+          isDelete = true;
+          console.log(`${x.name} ${x.status}가 목록에서 삭제됐습니다`);
+        }
+        return x.id !== id;
+      });
 
-    if (isDelete === false) {
-      console.log(`${id}에 해당하는 todo가 없습니다.`);
+      if (isDelete === false) {
+        console.log(`${id}에 해당하는 todo가 없습니다.`);
+      }
     }
   }
 

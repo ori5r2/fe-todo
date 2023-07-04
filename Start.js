@@ -33,7 +33,7 @@ class Start {
         this.todoList.show("all");
         break;
       case "delete":
-        this.todoList.delete(Number(args[1]));
+        this.todoList.delete(args[1]);
         this.todoList.show("all");
         break;
       case "update":
