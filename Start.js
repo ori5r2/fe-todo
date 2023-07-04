@@ -18,6 +18,36 @@ class Start {
       this.handleInput(input.trim());
     });
   }
+
+  // 입력받은 명령어 처리하는 함수
+  handleInput(input) {
+    const command = input.slice(0, input.indexOf("$"));
+    const args = input.slice(input.indexOf("$") + 1, input.length);
+
+    switch (command) {
+      case "show":
+        this.todoList.show(args);
+        break;
+      case "add":
+        const name = args.slice(0, args.indexOf("$"));
+        const tags = args.slice(args.indexOf("$") + 1, args.length);
+        this.todoList.add(name, tags);
+        break;
+      case "delete":
+        const id = Number(args);
+        this.todoList.delete(id);
+        break;
+      case "update":
+        const id2 = Number(args.slice(0, args.indexOf("$")));
+        const status = args.slice(args.indexOf("$") + 1, args.length);
+        this.todoList.update(id2, status);
+        break;
+      default:
+    }
+
+    console.log();
+    this.displayMenu();
+  }
 }
 
 const program = new Start();
