@@ -21,26 +21,20 @@ class Start {
 
   // 입력받은 명령어 처리하는 함수
   handleInput(input) {
-    const command = input.slice(0, input.indexOf("$"));
-    const args = input.slice(input.indexOf("$") + 1, input.length);
+    const args = input.split("$");
 
-    switch (command) {
+    switch (args[0]) {
       case "show":
-        this.todoList.show(args);
+        this.todoList.show(args[1]);
         break;
       case "add":
-        const name = args.slice(0, args.indexOf("$"));
-        const tags = args.slice(args.indexOf("$") + 1, args.length);
-        this.todoList.add(name, tags);
+        this.todoList.add(args[1], args[2]);
         break;
       case "delete":
-        const id = Number(args);
-        this.todoList.delete(id);
+        this.todoList.delete(Number(args[1]));
         break;
       case "update":
-        const id2 = Number(args.slice(0, args.indexOf("$")));
-        const status = args.slice(args.indexOf("$") + 1, args.length);
-        this.todoList.update(id2, status);
+        this.todoList.update(Number(args[1]), args[2]);
         break;
       default:
     }
