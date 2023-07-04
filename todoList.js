@@ -1,33 +1,30 @@
 class TodoList {
   // TodoList 생성자
   constructor() {
-    this.todo_list = [
-      // todo_list 초기값
-      // future work : json으로 불러오기
-      {
-        name: "자바스크립트 공부하기",
-        tags: ["programming", "javascript"],
-        status: "todo",
-        id: 12123123,
-      },
-      {
-        name: " 그림 그리기",
-        tags: ["picture", "favorite"],
-        status: "doing",
-        id: 312323,
-      },
-    ];
+    this.todo_list = [];
+    this.status_list = ["todo", "doing", "done"];
+  }
+
+  checkStatus(curr) {
+    if (!this.status_list.includes(curr)) {
+      console.log(`잘못된 상태 입력입니다.`);
+      return false;
+    }
+
+    return true;
   }
 
   // TodoList 보여주는 함수
   show(status) {
     if (status == "all") {
       // 전체 todo의 상태 보여주기
-      const cnt = { todo: 0, doing: 0, done: 0 };
+      const cnt = {};
+      for (let idx of this.status_list) {
+        cnt[idx] = 0;
+      }
+
       this.todo_list.map((todo) => {
-        if (todo.status === "todo") cnt.todo += 1;
-        else if (todo.status === "doing") cnt.doing += 1;
-        else if (todo.status === "done") cnt.done += 1;
+        cnt[todo.status] += 1;
       });
 
       console.log(
@@ -35,6 +32,10 @@ class TodoList {
       );
     } else {
       // status에 해당하는 todo 보여주기
+      if (!this.checkStatus(status)) {
+        return;
+      }
+
       let arr = [];
       this.todo_list.map((todo) => {
         if (todo.status === status) {
@@ -86,6 +87,9 @@ class TodoList {
 
   // TodoList에 존재하는 id값에 해당하는 todo 삭제
   update(id, status) {
+    if (!this.checkStatus(status)) {
+      return;
+    }
     let isUpdate = false;
     this.todo_list = this.todo_list.map((x) => {
       if (x.id === id) {
