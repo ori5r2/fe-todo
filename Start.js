@@ -36,7 +36,13 @@ class Start {
       case "update":
         this.todoList.update(Number(args[1]), args[2]);
         break;
+      case "close":
+        this.rl.close();
+        console.log(`프로그램을 종료합니다.`);
+        process.exit(1);
       default:
+        console.log(`show, add, delete, update, close 의 명령어를 입력하시오.`);
+        break;
     }
 
     console.log();
