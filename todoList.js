@@ -83,6 +83,25 @@ class TodoList {
 
     this.show("all");
   }
+
+  // TodoList에 존재하는 id값에 해당하는 todo 삭제
+  update(id, status) {
+    let isUpdate = false;
+    this.todo_list = this.todo_list.map((x) => {
+      if (x.id === id) {
+        isUpdate = true;
+        x.status = status;
+        console.log(`${x.name} ${status}으로 상태가 변경됐습니다`);
+      }
+      return x;
+    });
+
+    if (isUpdate === false) {
+      console.log(`${id}에 해당하는 todo가 없습니다.`);
+    }
+
+    this.show("all");
+  }
 }
 
 module.exports = TodoList;
