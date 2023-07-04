@@ -48,6 +48,23 @@ class TodoList {
       });
     }
   }
+
+  // TodoList에 todo 추가
+  add(name, tags) {
+    const id = this.todo_list.length + 1;
+
+    this.todo_list = [
+      ...this.todo_list,
+      {
+        name: name,
+        tags: tags,
+        status: "todo",
+        id: id,
+      },
+    ];
+    console.log(`${name} 1개가 추가됐습니다.(id : ${id})`);
+    this.show("all");
+  }
 }
 
 module.exports = TodoList;
