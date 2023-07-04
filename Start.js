@@ -22,19 +22,23 @@ class Start {
   // 입력받은 명령어 처리하는 함수
   handleInput(input) {
     const args = input.split("$");
+    const command = args[0];
 
-    switch (args[0]) {
+    switch (command) {
       case "show":
         this.todoList.show(args[1]);
         break;
       case "add":
         this.todoList.add(args[1], args[2]);
+        this.todoList.show("all");
         break;
       case "delete":
         this.todoList.delete(Number(args[1]));
+        this.todoList.show("all");
         break;
       case "update":
         this.todoList.update(Number(args[1]), args[2]);
+        this.todoList.show("all");
         break;
       case "close":
         this.rl.close();
@@ -51,6 +55,7 @@ class Start {
 }
 
 (function () {
+  // run main program
   const program = new Start();
   program.displayMenu();
 })();
