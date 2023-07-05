@@ -37,7 +37,7 @@ class Start {
         this.todoList.show("all");
         break;
       case "update":
-        this.todoList.update(Number(args[1]), args[2]);
+        this.todoList.update(Number(args[1]), args[2], args[3]);
         this.todoList.show("all");
         break;
       case "close":

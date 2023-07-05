@@ -16,11 +16,32 @@ class TodoList {
       },
     ];
     this.status_list = ["todo", "doing", "done"];
+    this.key_list = ["name", "tags", "status"];
+  }
+
+  checkId(id) {
+    let isId = false;
+    this.todo_list.forEach((x) => {
+      if (x.id === id) {
+        isId = true;
+      }
+    });
+    if (!isId) console.log(`${id}에 해당하는 todo가 없습니다.`);
+    return isId;
   }
 
   checkStatus(cur_status) {
     if (!this.status_list.includes(cur_status)) {
       console.log(`잘못된 상태 입력입니다.`);
+      return false;
+    }
+
+    return true;
+  }
+
+  checkKey(key) {
+    if (!this.key_list.includes(key)) {
+      console.log(`잘못된 키 입력입니다.`);
       return false;
     }
 
@@ -106,25 +127,31 @@ class TodoList {
     }
   }
 
-  // TodoList에 존재하는 id값에 해당하는 todo 삭제
-  update(id, status) {
-    if (!this.checkStatus(status)) {
-      return;
-    }
-
-    let isUpdate = false;
+  updateKeyValue(id, key, value) {
     this.todo_list = this.todo_list.map((x) => {
       if (x.id === id) {
-        isUpdate = true;
-        x.status = status;
-        console.log(`${x.name} ${status}으로 상태가 변경됐습니다`);
+        let old_value = x[key];
+
+        if (key == "tags") {
+          const tag_arr = this.splitTag(value);
+          x[key] = tag_arr;
+          value = tag_arr;
+        } else {
+          x[key] = value;
+        }
+
+        console.log(`${old_value}(이)가 ${value}으로 상태가 변경됐습니다`);
       }
       return x;
     });
+  }
 
-    if (isUpdate === false) {
-      console.log(`${id}에 해당하는 todo가 없습니다.`);
-    }
+  // TodoList에 존재하는 id값에 해당하는 todo 삭제
+  update(id, key, value) {
+    if (!this.checkId(id) || !this.checkKey(key)) return;
+    if (key === "status" && !this.checkStatus(value)) return;
+
+    this.updateKeyValue(id, key, value);
   }
 }
 
