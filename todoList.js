@@ -100,6 +100,7 @@ class TodoList {
         let old_value = x[key];
 
         if (key == "tags") {
+          if (!checkList(key, value)) return;
           const tag_arr = this.splitTag(value);
           x[key] = tag_arr;
           value = tag_arr;

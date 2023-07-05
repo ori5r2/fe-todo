@@ -21,7 +21,10 @@ function checkId(id, todo_list) {
 
 // tags가 규칙에 맞는지 확인하는 함수
 function checkTags(tags) {
-  if (tags[0] !== "[" || tags[tags.length - 1] !== "]") return false;
+  if (tags[0] !== "[" || tags[tags.length - 1] !== "]") {
+    console.log(`잘못된 태그 입력입니다.`);
+    return false;
+  }
   return true;
 }
 
