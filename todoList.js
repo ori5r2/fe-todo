@@ -107,7 +107,7 @@ class TodoList {
           x[key] = value;
         }
 
-        console.log(`${old_value}(이)가 ${value}으로 상태가 변경됐습니다`);
+        console.log(`${old_value}(이)가 ${value}으로 변경됐습니다`);
       }
       return x;
     });
